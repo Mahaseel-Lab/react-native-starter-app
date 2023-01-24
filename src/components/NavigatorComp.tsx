@@ -1,15 +1,15 @@
+import { useFocusEffect } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useCallback, useState } from 'react'
 import { useAuthContext } from '../common/context/authContext'
+import Main from '../screens/loggedinScreens/Main'
+import OtherScreen from '../screens/loggedinScreens/OtherScreen'
+import LoginScreen from '../screens/loggedoutScreens/Login'
+import RegisterScreen from '../screens/loggedoutScreens/Register'
 import {
   LoggedInScreens as LoggedInScreensTypes,
   LoggedOutScreens as LoggedOutScreensTypes
 } from '../types/navigation.types'
-import { useFocusEffect } from '@react-navigation/native'
-import { useCallback, useState } from 'react'
-import OtherScreen from '../screens/loggedinScreens/OtherScreen'
-import LoginScreen from '../screens/loggedoutScreens/Login'
-import RegisterScreen from '../screens/loggedoutScreens/Register'
-import Main from '../screens/loggedinScreens/Main'
 
 const AuthStack = createNativeStackNavigator<LoggedOutScreensTypes>()
 const MainStack = createNativeStackNavigator<LoggedInScreensTypes>()
@@ -43,6 +43,7 @@ export const NavigatorComp = () => {
 
   useFocusEffect(
     useCallback(() => {
+      // Get token and check if signedin
       const getTokenAsync = async () => {
         const token = getToken()
         if (typeof token === 'string') return setSignedIn(true)
