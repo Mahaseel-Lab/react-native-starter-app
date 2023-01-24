@@ -28,9 +28,9 @@ const Main = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    color: '#000',
     alignItems: 'center',
     justifyContent: 'center'
   }
 })
+
 export default Main
