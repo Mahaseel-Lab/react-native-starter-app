@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }: Props) => {
   const [pass, setPass] = useState('')
 
   return (
-    <View style={[styles.container, padding, { backgroundColor: color }]}>
+    <View style={[padding, styles.container, { backgroundColor: color }]}>
       <TextInput
         label={'Username'}
         mode="flat"
@@ -53,6 +53,8 @@ const LoginScreen = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingRight: 25,
+    paddingLeft: 25,
     justifyContent: 'center'
   }
 })

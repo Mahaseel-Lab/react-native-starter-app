@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { useAuthContext } from '../common/context/authContext'
 import Main from '../screens/loggedinScreens/Main'
 import OtherScreen from '../screens/loggedinScreens/OtherScreen'
@@ -17,22 +17,16 @@ const NavStack = createNativeStackNavigator<
 
 export const NavigatorComp = () => {
   const { isSignedIn, getToken } = useAuthContext()
-  const [signedIn, setSignedIn] = useState(false)
 
   useFocusEffect(
     useCallback(() => {
       // Get token and check if signedin
-      const getTokenAsync = async () => {
-        const token = getToken()
-        if (typeof token === 'string') return setSignedIn(true)
-        token.then(result => (result ? setSignedIn(true) : setSignedIn(false)))
-      }
-      getTokenAsync()
+      getToken()
     }, [getToken])
   )
   return (
     <NavStack.Navigator screenOptions={{ headerShown: false }}>
-      {signedIn ? (
+      {isSignedIn ? (
         <NavStack.Group>
           <NavStack.Screen name="Main" component={Main} />
           <NavStack.Screen name="Other" component={OtherScreen} />
