@@ -14,6 +14,8 @@ export const SplashScreen = ({ setLoaded, resizeMode = 'contain' }: Props) => {
   const { getToken } = useAuthContext()
   // Note: You can set resizeMode prop to resize the view.
 
+  // Call this function to load data for example while
+  // splash screen loads
   useFocusEffect(
     useCallback(() => {
       // Ex: Prepare Token from storage
