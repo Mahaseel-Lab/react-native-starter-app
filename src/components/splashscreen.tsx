@@ -16,10 +16,10 @@ export const SplashScreen = ({ setLoaded, resizeMode = 'contain' }: Props) => {
       source={require('../assets/splash-screen.json')}
       style={[styles.splash, { aspectRatio: width / height }]}
       autoPlay
-      loop={true}
+      loop={false}
       resizeMode={resizeMode}
       onAnimationFinish={() => {
-        setLoaded(false)
+        setLoaded(true)
       }}
     />
   )
