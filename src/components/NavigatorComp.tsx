@@ -11,31 +11,9 @@ import {
   LoggedOutScreens as LoggedOutScreensTypes
 } from '../types/navigation.types'
 
-const AuthStack = createNativeStackNavigator<LoggedOutScreensTypes>()
-const MainStack = createNativeStackNavigator<LoggedInScreensTypes>()
-
-const LoggedOutScreens = ({ signedIn }: { signedIn: boolean }) => (
-  <>
-    <AuthStack.Navigator screenOptions={{ headerShown: false }}>
-      <AuthStack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{
-          title: 'Log in',
-          animationTypeForReplace: signedIn ? 'pop' : 'push'
-        }}
-      />
-      <AuthStack.Screen name="Register" component={RegisterScreen} />
-    </AuthStack.Navigator>
-  </>
-)
-
-const LoggedInScreens = () => (
-  <MainStack.Navigator screenOptions={{ headerShown: false }}>
-    <MainStack.Screen name="Main" component={Main} />
-    <MainStack.Screen name="Other" component={OtherScreen} />
-  </MainStack.Navigator>
-)
+const NavStack = createNativeStackNavigator<
+  LoggedOutScreensTypes & LoggedInScreensTypes
+>()
 
 export const NavigatorComp = () => {
   const { isSignedIn, getToken } = useAuthContext()
@@ -52,10 +30,27 @@ export const NavigatorComp = () => {
       getTokenAsync()
     }, [getToken])
   )
-  return signedIn ? (
-    <LoggedInScreens />
-  ) : (
-    <LoggedOutScreens signedIn={isSignedIn} />
+  return (
+    <NavStack.Navigator screenOptions={{ headerShown: false }}>
+      {signedIn ? (
+        <NavStack.Group>
+          <NavStack.Screen name="Main" component={Main} />
+          <NavStack.Screen name="Other" component={OtherScreen} />
+        </NavStack.Group>
+      ) : (
+        <NavStack.Group>
+          <NavStack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              title: 'Log in',
+              animationTypeForReplace: isSignedIn ? 'pop' : 'push'
+            }}
+          />
+          <NavStack.Screen name="Register" component={RegisterScreen} />
+        </NavStack.Group>
+      )}
+    </NavStack.Navigator>
   )
 }
 
