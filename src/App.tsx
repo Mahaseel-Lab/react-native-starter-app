@@ -1,31 +1,15 @@
+import React, { useState } from 'react'
 import AppContainer from './components/AppContainer'
 import NavigatorComp from './components/NavigatorComp'
-import LottieView from 'lottie-react-native'
-import { StyleSheet } from 'react-native'
+import SplashScreen from './components/splashscreen'
 
 const App = () => {
+  const [loaded, setLoaded] = useState(false)
   return (
     <AppContainer>
-      <LottieView
-        style={styles.splash}
-        source={require('./assets/splash-screen.json')}
-        autoPlay
-        loop={false}
-        resizeMode="cover"
-        onAnimationFinish={() => {
-          console.log('animation finished')
-        }}
-      />
-      <NavigatorComp />
+      {loaded ? <NavigatorComp /> : <SplashScreen setLoaded={setLoaded} />}
     </AppContainer>
   )
 }
 
-const styles = StyleSheet.create({
-  splash: {
-    flex: 1,
-    alignItems: 'center',
-    margin: 0
-  }
-})
 export default App
