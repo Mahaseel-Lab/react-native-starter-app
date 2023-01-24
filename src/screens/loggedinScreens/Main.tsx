@@ -1,4 +1,5 @@
-import { Text, View, Button, StyleSheet } from 'react-native'
+import { View, Button, StyleSheet } from 'react-native'
+import { Text } from 'react-native-paper'
 import { LoggedInScreens } from '../../types/navigation.types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAuthContext } from '../../common/context/authContext'
@@ -15,7 +16,9 @@ const Main = ({ navigation }: Props) => {
 
   return (
     <View style={[styles.container, padding, { backgroundColor: color }]}>
-      <Text style={{ color: textColor }}>Hello, World!</Text>
+      <Text variant="displayLarge" style={{ color: textColor }}>
+        Hello, World!
+      </Text>
       <Button
         title="Click to go to other page"
         onPress={() => navigation.navigate('Other')}
