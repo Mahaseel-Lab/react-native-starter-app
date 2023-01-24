@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet } from 'react-native'
 
 interface Props {
   setLoaded: (state: boolean) => void
-  resizeMode: AnimatedLottieViewProps['resizeMode']
+  resizeMode?: AnimatedLottieViewProps['resizeMode']
 }
 
 export const SplashScreen = ({ setLoaded, resizeMode = 'contain' }: Props) => {
