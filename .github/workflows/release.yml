@@ -21,6 +21,7 @@ jobs:
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
         uses: actions/setup-java@v3
         with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: 17
 
       - name: Get yarn cache directory path
