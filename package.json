@@ -17,6 +17,7 @@
     "@react-native-firebase/analytics": "^16.5.2",
     "@react-native-firebase/app": "^16.5.2",
     "@react-native-firebase/crashlytics": "^16.5.2",
+    "@react-native-firebase/messaging": "^16.5.2",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
     "lottie-react-native": "^5.1.4",
