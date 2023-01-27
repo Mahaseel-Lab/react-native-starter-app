@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import crashlytics from '@react-native-firebase/crashlytics'
 import React from 'react'
 import useAuthReducer from '../hooks/authReducer'
 
@@ -39,8 +40,13 @@ export const AuthContextProvider = ({ children }: Props) => {
   const authActions: AuthActions = React.useMemo(
     () => ({
       login: async (token: string) => {
-        await AsyncStorage.setItem('@token', token)
-        dispatch({ type: 'LOGIN', token })
+        try {
+          await AsyncStorage.setItem('@token', token)
+          dispatch({ type: 'LOGIN', token })
+        } catch (err) {
+          crashlytics().recordError(err as Error)
+          console.error(err)
+        }
       },
       signUp: async (token: string) => {
         await AsyncStorage.setItem('@token', token)

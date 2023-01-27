@@ -1,3 +1,4 @@
+import analytics from '@react-native-firebase/analytics'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -17,6 +18,13 @@ const LoginScreen = ({ navigation }: Props) => {
 
   const [username, setUsername] = useState('')
   const [pass, setPass] = useState('')
+
+  const handleLogin = async () => {
+    await analytics().logEvent('Login', {
+      interaction: 'User Pressed Login!'
+    })
+    Auth.login(String(Math.random() * 10))
+  }
 
   return (
     <View style={[padding, styles.container, { backgroundColor: color }]}>
@@ -38,9 +46,7 @@ const LoginScreen = ({ navigation }: Props) => {
         accessibilityLabelledBy={'PASSWORD'}
         accessibilityLanguage={'EN'}
       />
-      <Button
-        mode="outlined"
-        onPress={() => Auth.login(String(Math.random() * 10))}>
+      <Button mode="outlined" onPress={handleLogin}>
         Login
       </Button>
       <Button mode="outlined" onPress={() => navigation.navigate('Register')}>
