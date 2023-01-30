@@ -1,6 +1,6 @@
 {
-  "name": "starter",
-  "displayName": "starter",
+  "name": "Starter",
+  "displayName": "Starter",
   "plugins": [
     "@react-native-firebase/app",
     "@react-native-firebase/perf",

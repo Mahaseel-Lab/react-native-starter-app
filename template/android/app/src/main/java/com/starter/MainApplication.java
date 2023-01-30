@@ -1,4 +1,4 @@
-package com.starter.test;
+package com.starter;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
