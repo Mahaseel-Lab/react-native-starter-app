@@ -10,7 +10,8 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
   if (remoteMessage.data) {
     // Save the notification locally
     const notificationList =
-      JSON.parse(await AsyncStorage.getItem('@SM_NOTIFICATIONS')) || []
+      JSON.parse((await AsyncStorage.getItem('@SM_NOTIFICATIONS')) as string) ||
+      []
     notificationList.push({
       title: remoteMessage.data.title,
       message: remoteMessage.data.message,
